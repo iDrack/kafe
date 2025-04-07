@@ -1,5 +1,4 @@
 import 'package:kafe/providers/firebase_auth_provider.dart';
-import 'package:kafe/theme.dart';
 import 'package:kafe/views/main_view.dart';
 import 'package:kafe/views/signin_view.dart';
 import 'package:firebase_core/firebase_core.dart';
