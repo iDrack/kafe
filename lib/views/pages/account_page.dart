@@ -6,9 +6,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../models/app_user.dart';
 import '../../providers/firebase_auth_provider.dart';
+import '../../widgets/account/profile_avatar.dart';
 import '../../widgets/form/profile_form.dart';
 
 class AccountPage extends HookConsumerWidget {
@@ -45,24 +47,36 @@ class AccountPage extends HookConsumerWidget {
       isLoading.value = false;
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 40),
-      child:
-          isLoading.value
+    Future<void> pickImage(ImageSource source) async {
+      final pickedFile = await ImagePicker().pickImage(source: source);
+
+      if (pickedFile != null) {
+        const SnackBar(content: Text("Impossible d'uploader votre image, functionnalité payante."));
+      }
+    }
+
+    return isLoading.value
               ? const Center(child: CircularProgressIndicator())
-              : Column(
-                children: [
-                  Text("Deevee : ${user?.deevee}"),
-                  Text("Graines d'or : ${user?.goldenSeed}"),
-                  const SizedBox(height: 20),
-                  ProfileForm(
-                    onSubmit:
-                        (newUsername, newPassword) =>
+              : SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 56),
+                  child: Column(
+                    children: [
+                      ProfileAvatar(
+                        imageUrl: null,
+                        onTapGallery: () => pickImage(ImageSource.gallery),
+                        onTapCamera: () => pickImage(ImageSource.camera),
+                      ),
+                      const SizedBox(height: 20),
+                      ProfileForm(
+                        onSubmit:
+                            (newUsername, newPassword) =>
                             updateProfile(newUsername, newPassword),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-    );
+                ),
+              );
   }
 }
