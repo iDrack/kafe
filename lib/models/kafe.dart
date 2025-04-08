@@ -1,7 +1,7 @@
 enum Kafe {
   Rubisca(
     nom: "☕ Rubisca",
-    tempsDePousse: Duration(minutes: 1),
+    tempsDePousse: 60,
     prix: 2,
     tailleProductionInitial: 0.632,
     gout: 15,
@@ -11,7 +11,7 @@ enum Kafe {
   ),
   Arbrista(
     nom: "☕ Arbrista",
-    tempsDePousse: Duration(minutes: 4),
+    tempsDePousse: 4*60,
     prix: 6,
     tailleProductionInitial: 0.274,
     gout: 87,
@@ -21,7 +21,7 @@ enum Kafe {
   ),
   Roupetta(
     nom: "☕ Roupetta",
-    tempsDePousse: Duration(minutes: 2),
+    tempsDePousse: 2*60,
     prix: 3,
     tailleProductionInitial: 0.461,
     gout: 35,
@@ -31,7 +31,7 @@ enum Kafe {
   ),
   Tourista(
     nom: "☕ Tourista",
-    tempsDePousse: Duration(minutes: 1),
+    tempsDePousse: 60,
     prix: 1,
     tailleProductionInitial: 0.961,
     gout: 3,
@@ -41,7 +41,7 @@ enum Kafe {
   ),
   Goldoriat(
     nom: "☕ Goldoriat",
-    tempsDePousse: Duration(minutes: 3),
+    tempsDePousse: 3*60,
     prix: 2,
     tailleProductionInitial: 0.473,
     gout: 39,
@@ -51,7 +51,7 @@ enum Kafe {
   );
 
   final String nom;
-  final Duration tempsDePousse;
+  final int tempsDePousse;
   final int prix;
   final num tailleProductionInitial;
   final int gout;

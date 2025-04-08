@@ -8,9 +8,9 @@ import '../../providers/firebase_auth_provider.dart';
 import 'champ_card.dart';
 
 class ChampList extends HookConsumerWidget {
-  List<Champ> champs;
+  final List<Champ> champs;
 
-  ChampList({super.key, required this.champs});
+  const ChampList({super.key, required this.champs});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

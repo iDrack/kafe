@@ -1,23 +1,25 @@
-import 'package:kafe/models/pousse.dart';
+import 'kafe.dart';
 
 class Plan {
-    Pousse? pousse;
-
+    Kafe? kafe;
+    DateTime? datePlantation;
     Plan();
 
-    Plan.all({required this.pousse});
+    Plan.all({required this.kafe, required this.datePlantation});
 
     Map<String, dynamic> toMap() {
       return {
-        'pousse': pousse?.toMap(), // Vérification si pousse est null
+        'kafe': kafe?.nom,
+        'datePlantation': datePlantation?.toIso8601String(),
       };
     }
 
     factory Plan.fromMap(Map<String, dynamic> map) {
       return Plan.all(
-        pousse: map['pousse'] != null
-            ? Pousse.fromMap(map['pousse'] as Map<String, dynamic>)
+        kafe: map['kafe'] != null
+            ? Kafe.values.firstWhere((x) => x.nom == map['kafe'])
             : null, // Vérification si pousse est null
+        datePlantation: map['datePlantation'] != null ?DateTime.parse(map['datePlantation']) : null,
       );
     }
   }
