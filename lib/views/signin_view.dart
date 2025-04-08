@@ -14,11 +14,8 @@ class SigninView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = useState(false);
 
     void signin(String email, String password, String username) {
-      isLoading.value = true;
-
       ref
           .watch(firebaseAuthProvider.notifier)
           .createUserInFirebase(username, email, password)
@@ -41,16 +38,12 @@ class SigninView extends HookConsumerWidget {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(res)));
-              isLoading.value = false;
             }
           });
 
-      isLoading.value = false;
     }
 
     void login(String email, String password) {
-      isLoading.value = true;
-
       ref.watch(firebaseAuthProvider.notifier).logIn(email, password).then((
         res,
       ) {
@@ -60,11 +53,9 @@ class SigninView extends HookConsumerWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Les informations sont incorrectes.")),
           );
-          isLoading.value = false;
         }
       });
 
-      isLoading.value = false;
     }
 
     useEffect(() {
@@ -83,7 +74,7 @@ class SigninView extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Bienvenue dans le Kafé",
+            "Bienvenue dans le Ch'ti Kafé",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           SizedBox(height: 24,),

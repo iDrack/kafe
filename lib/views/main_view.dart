@@ -15,17 +15,18 @@ class MainView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AppUser? user = ref.watch(userProvider);
+    //final AppUser? user = ref.watch(userProvider);
+    final userAsync = ref.watch(userStreamProvider);
 
     final selectedIndex = useState(0);
-    
+
     List<Widget> widgetOptions = <Widget> [
       HomePage(),
       Text('Inventaire'),
       Text('Concours'),
       AccountPage(),
     ];
-    
+
     void onItemTap(int index) {
       selectedIndex.value = index;
     }
@@ -38,32 +39,45 @@ class MainView extends HookConsumerWidget {
       });
       return null;
     });
-    return DefaultTabController(
+    return userAsync.when(
+      data: (user) {
+        return DefaultTabController(
           length: 2,
           child: Scaffold(
-              appBar: AppBar(
-                title: const Text("Kafé"),
-                bottom: PreferredSize(preferredSize: const Size.fromHeight(12.0), child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8.0),
-                  child: Row(children: [
-                    Text("💎 : ${user?.deevee}"),
-                    SizedBox(width: 16.0),
-                    Text("🪙 : ${user?.goldenSeed}"),
-                  ],),
-                )),
-                leading: LogoutWidget(),
+            appBar: AppBar(
+              title: const Text("Ch'ti Kafé"),
+              centerTitle: true,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(12.0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
+                  child: Row(
+                    children: [
+                      Text("💎 : ${user?.deevee ?? 0}"),
+                      SizedBox(width: 16.0),
+                      Text("🪙 : ${user?.goldenSeed ?? 0}"),
+                    ],
+                  ),
+                ),
               ),
-              body: widgetOptions.elementAt(selectedIndex.value),
+              leading: LogoutWidget(),
+            ),
+            body: widgetOptions.elementAt(selectedIndex.value),
             bottomNavigationBar: NavigationBar(
               selectedIndex: selectedIndex.value,
-                onDestinationSelected: onItemTap,
-                destinations: const <NavigationDestination> [
-                  NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Mes champs'),
-                  NavigationDestination(icon: Icon(Icons.inventory_2_outlined), label: 'Mon stock'),
-                  NavigationDestination(icon: Icon(Icons.star_border), label: 'Concours'),
-                  NavigationDestination(icon: Icon(Icons.account_circle), label: 'Mon profil'),
-                ])
+              onDestinationSelected: onItemTap,
+              destinations: const <NavigationDestination>[
+                NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Mes champs'),
+                NavigationDestination(icon: Icon(Icons.inventory_2_outlined), label: 'Mon stock'),
+                NavigationDestination(icon: Icon(Icons.star_border), label: 'Concours'),
+                NavigationDestination(icon: Icon(Icons.account_circle), label: 'Mon profil'),
+              ],
+            ),
           ),
         );
+      },
+      loading: () => Center(child: CircularProgressIndicator()),
+      error: (err, stack) => Center(child: Text("Erreur : $err")),
+    );
       }
 }

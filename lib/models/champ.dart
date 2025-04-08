@@ -9,8 +9,9 @@ class Champ {
   late final String id;
   late final Specificite specificite;
   late final List<Plan> plans;
+  final DateTime createdAt;
 
-  Champ({required this.userId}) {
+  Champ({required this.userId}) : createdAt = DateTime.now() {
     int choice = Random().nextInt(3);
     specificite = Specificite.values[choice];
     plans = [Plan(), Plan(), Plan(), Plan()];
@@ -21,14 +22,16 @@ class Champ {
     required this.specificite,
     required this.plans,
     required this.id,
+    required this.createdAt,
   });
 
   Map<String, dynamic> toDocument() {
     return {
       'userId': userId,
       'specificite': specificite.nom,
-      //'plans': plans.map((plan) => plan.toMap()).toList(),
-      'plans': plans.map((plan) => Plan()).toList(),
+      'plans': plans.map((plan) => plan.toMap()).toList(),
+      'createdAt': createdAt.toIso8601String(),
+      //'plans': plans.map((plan) => Plan()).toList(),
     };
   }
 
@@ -42,6 +45,7 @@ class Champ {
           .map((plan) => Plan.fromMap(plan as Map<String, dynamic>))
           .toList(),
       id: id,
+      createdAt: DateTime.parse(snapshot['createdAt'])
     );
   }
 }

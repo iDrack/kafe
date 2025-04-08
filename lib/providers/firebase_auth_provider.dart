@@ -8,6 +8,24 @@ final firebaseUser = StateProvider<User?>((ref) => null);
 
 final userProvider = StateProvider<AppUser?>((ref) => null);
 
+final userStreamProvider = StreamProvider<AppUser?>((ref) {
+  final currentUser = ref.read(firebaseUser.notifier).state;
+  if (currentUser == null) {
+    return Stream.value(null);
+  }
+
+  return FirebaseFirestore.instance
+      .collection('users')
+      .doc(currentUser.uid)
+      .snapshots()
+      .map((snapshot) {
+    if (snapshot.exists) {
+      return AppUser.fromSnapshot(snapshot.data(), snapshot.id);
+    }
+    return null;
+  });
+});
+
 final firebaseAuthProvider =
     StateNotifierProvider<FirebaseAuthProvider, FirebaseAuth?>(
         (ref) => FirebaseAuthProvider(ref));
@@ -73,7 +91,7 @@ class FirebaseAuthProvider extends StateNotifier<FirebaseAuth?> {
     await signIn(email, password)
       .then((value) {
         if (value != null && value.user != null) {
-          final user = AppUser(uuid: value.user!.uid, name: name, email: email, deevee: 10, goldenSeed: 0);
+          final user = AppUser(uuid: value.user!.uid, name: name, email: email, deevee: 15, goldenSeed: 0);
           ref.read(fireStoreProvider.notifier).createNewUser(user);
         }
       }, onError: (error) => 'Failed to signin.');
@@ -101,7 +119,26 @@ class FirebaseAuthProvider extends StateNotifier<FirebaseAuth?> {
                                                       .get();
       return result.docs.isNotEmpty;
   }
-  
+
+  Future<void> updateDeevee(int amount) async {
+    final user = ref.read(userProvider);
+    if (user == null) {
+      throw Exception("Aucun utilisateur connecté.");
+    }
+
+    if (user.deevee < amount) {
+      throw Exception("Fonds insuffisants.");
+    }
+
+    user.deevee -= amount;
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uuid)
+        .update({'deevee': user.deevee});
+    ref.read(userProvider.notifier).state = user;
+  }
+
 
   Future<void> logout() async {
     ref.watch(userProvider.notifier).state = null;

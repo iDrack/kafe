@@ -1,5 +1,5 @@
 enum Specificite {
-  Neutre(nom: "Neutre"),
+  Neutre(nom: "Aucun"),
   Beaucoup(nom: "Rendement x2"),
   Rapide(nom: "Temps /2");
 

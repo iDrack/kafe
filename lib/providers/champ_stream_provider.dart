@@ -25,10 +25,10 @@ class ChampStreamNotifier extends StreamNotifier<List<Champ>> {
     FirebaseFirestore.instance.collection('champs').add(champ.toDocument());
   }
 
-  Future<void> updateChamp(Champ champ, String id) async {
+  Future<void> updateChamp(Champ champ) async {
     FirebaseFirestore.instance
         .collection('champs')
-        .doc(id)
+        .doc(champ.id)
         .update(champ.toDocument());
   }
 
@@ -38,6 +38,7 @@ class ChampStreamNotifier extends StreamNotifier<List<Champ>> {
         FirebaseFirestore.instance
             .collection('champs')
             .where('userId', isEqualTo: userId)
+            .orderBy('createdAt', descending: false)
             .snapshots();
 
     return snapshots.map(

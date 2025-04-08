@@ -2,8 +2,8 @@ class   AppUser {
   final String uuid;
   final String email;
   String name;
-  int deevee;
-  int goldenSeed;
+  int deevee = 0;
+  int goldenSeed = 0;
 
   AppUser({required this.uuid, required this.name, required this.email, required this.deevee, required this.goldenSeed});
 
