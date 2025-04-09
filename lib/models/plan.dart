@@ -1,4 +1,4 @@
-import 'kafe.dart';
+import 'enums/kafe.dart';
 
 class Plan {
     Kafe? kafe;

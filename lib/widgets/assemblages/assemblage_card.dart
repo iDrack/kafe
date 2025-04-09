@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kafe/models/assemblage.dart';
-import 'package:kafe/models/champ.dart';
-import 'package:kafe/providers/assemblage_stream_provider.dart';
-import 'package:kafe/providers/champ_stream_provider.dart';
-import 'package:kafe/widgets/gato/gato_stat_card.dart';
-import 'package:kafe/widgets/modales/modale_plantation.dart';
-import 'package:kafe/widgets/pousses/pousse_card.dart';
 import 'package:intl/intl.dart';
-
-
-import '../../models/kafe.dart';
-import '../../providers/firebase_auth_provider.dart';
+import 'package:kafe/models/assemblage.dart';
+import 'package:kafe/providers/assemblage_stream_provider.dart';
+import 'package:kafe/widgets/gato/gato_stat_card.dart';
 
 class AssemblageCard extends HookConsumerWidget {
   final Assemblage assemblage;
@@ -20,7 +12,9 @@ class AssemblageCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void inscrire() {}
+    void inscrire() {
+      ref.watch(assemblageStreamProvider.notifier).setAssemblageInscrit(assemblage);
+    }
 
     void supprimer() async {
       final bool? confirmed = await showDialog<bool>(
@@ -81,7 +75,7 @@ class AssemblageCard extends HookConsumerWidget {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).colorScheme.error,
+                        Colors.redAccent,
                       ),
                       foregroundColor: MaterialStateProperty.all(
                         Theme.of(context).colorScheme.onPrimary,

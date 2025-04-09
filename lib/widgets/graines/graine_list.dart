@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/widgets/graines/graine_card.dart';
 
 import '../../models/app_user.dart';
-import '../../models/kafe.dart';
+import '../../models/enums/kafe.dart';
 
 class GraineList extends HookConsumerWidget {
   final AppUser user;

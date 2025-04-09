@@ -9,26 +9,26 @@ enum EtatPousse {
   ),
   Termine(
     nom: "Terminé",
-    message: "Bonne récolte, fruit parfait 😎",
+    message: "Récolte parfaite 😎 :",
     icon: Icon(Icons.check_circle_outline, color: Colors.green,),
     penalite: 1.0
   ),
   Depasse(
     nom: "Dépassé",
-      message: "Récolte correct, le fruit est en bonne état 😃",
-      icon: Icon(Icons.running_with_errors_outlined, color: Colors.orange,),
+      message: "Récolte correct 😃 :",
+      icon: Icon(Icons.running_with_errors_outlined, color: Color(0xFFd8cf1c),),
     penalite: 0.8
   ),
   Abime(
       nom: "Lente",
-      message: "Récolte trop lente, le fruit est abimé ☹️",
-      icon: Icon(Icons.error_outline, color: Colors.red,),
+      message: "Récolte trop lente ☹️ :",
+      icon: Icon(Icons.error_outline, color: Colors.orange,),
     penalite: 0.5,
   ),
   Perime(
     nom: "Périmé",
-    message: "Mauvaise récolte, le fruit est fanée 😨️",
-    icon: Icon(Icons.delete, color: Colors.black54,),
+    message: "Mauvaise récolte 😨️ :",
+    icon: Icon(Icons.new_releases_outlined, color: Colors.redAccent,),
     penalite: 0.2,
   );
 

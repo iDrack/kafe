@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kafe/models/plan.dart';
-import 'package:kafe/models/specificite.dart';
+import 'package:kafe/models/enums/specificite.dart';
 
 class Champ {
   final String userId;

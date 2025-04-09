@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/providers/firebase_auth_provider.dart';
 
-import '../../models/kafe.dart';
+import '../../models/enums/kafe.dart';
 
 class ModaleSechage extends HookConsumerWidget {
   final Kafe kafe;
@@ -18,17 +18,20 @@ class ModaleSechage extends HookConsumerWidget {
     final selectedAmount = useState(0.0);
 
     return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(title: Text(kafe.nom), subtitle: Text("Séchage")),
-          ListTile(
-            title: Text('Sélectionner la quantité'),
-            subtitle: Text("Maximum : ${maxAmount.toStringAsFixed(2)} Kg"),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 16.0,),
+            Center(child: Text(
+              "Préparation à torréfaction :", style: TextStyle(fontSize: 24.0),),),
+            ListTile(title: Text(kafe.nom)),
+            ListTile(
+              title: Text('Sélectionner la quantité'),
+              subtitle: Text("Maximum : ${maxAmount.toStringAsFixed(2)} Kg"),
+            ),
+            Column(
               children: [
                 Slider(
                   value: selectedAmount.value,
@@ -67,10 +70,10 @@ class ModaleSechage extends HookConsumerWidget {
                             ),
                           ),
                           onPressed: () {
-                            if(selectedAmount.value > 0) {
+                            if (selectedAmount.value > 0) {
                               ref
-                                .watch(firebaseAuthProvider.notifier)
-                                .updateSechage(kafe, selectedAmount.value);
+                                  .watch(firebaseAuthProvider.notifier)
+                                  .updateSechage(kafe, selectedAmount.value);
                             }
                             Navigator.pop(context);
                           },
@@ -80,11 +83,10 @@ class ModaleSechage extends HookConsumerWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 128.0),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -93,8 +95,12 @@ class ModaleSechage extends HookConsumerWidget {
 void showSechageModal(BuildContext context, Kafe kafe, num maxAmount) {
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     builder: (context) {
-      return ModaleSechage(kafe: kafe, maxAmount: maxAmount);
+      return FractionallySizedBox(
+        heightFactor: 0.4,
+        child: ModaleSechage(kafe: kafe, maxAmount: maxAmount),
+      );
     },
   );
 }

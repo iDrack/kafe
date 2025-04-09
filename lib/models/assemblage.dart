@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'kafe.dart';
+import 'enums/kafe.dart';
 
 class Assemblage {
   final String userId;
@@ -9,11 +9,12 @@ class Assemblage {
   late final Map<String, num> gato;
   late num poid;
   final DateTime createdAt;
+  late var inscrit;
 
   Assemblage({required this.userId, required this.quantiteKafe})
     : createdAt = DateTime.now() {
     poid = 0.0;
-
+    inscrit = false;
     gato = {
       "Gout": 0.0,
       "Amertume": 0.0,
@@ -46,6 +47,7 @@ class Assemblage {
     required this.gato,
     required this.poid,
     required this.createdAt,
+    required this.inscrit,
   });
 
   Map<String, dynamic> toDocument() {
@@ -57,6 +59,7 @@ class Assemblage {
       'gato': this.gato.map((key, value) => MapEntry(key, value)),
       'poid': this.poid,
       'createdAt': this.createdAt.toIso8601String(),
+      'inscrit': this.inscrit,
     };
   }
 
@@ -82,6 +85,7 @@ class Assemblage {
           {},
       poid: snapshot['poid'],
       createdAt: DateTime.parse(snapshot['createdAt']),
+      inscrit: snapshot['inscrit'],
     );
   }
 }

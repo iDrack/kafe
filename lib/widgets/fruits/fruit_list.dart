@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/widgets/fruits/fruit_card.dart';
 import 'package:kafe/widgets/modales/modale_sechage.dart';
 import '../../models/app_user.dart';
-import '../../models/kafe.dart';
+import '../../models/enums/kafe.dart';
 
 class FruitList extends HookConsumerWidget {
   final AppUser user;

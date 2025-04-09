@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/providers/firebase_auth_provider.dart';
+import 'package:kafe/views/pages/competition_page.dart';
 import 'package:kafe/views/pages/home_page.dart';
 import 'package:kafe/views/pages/stock_page.dart';
 import 'package:kafe/widgets/logout_widget.dart';
@@ -43,7 +44,7 @@ class MainView extends HookConsumerWidget {
           List<Widget> widgetOptions = <Widget>[
             HomePage(),
             StockPage(user: user),
-            Text('Concours'),
+            CompetitionPage(user: user),
             AccountPage(),
           ];
           return DefaultTabController(
@@ -75,9 +76,9 @@ class MainView extends HookConsumerWidget {
                 selectedIndex: selectedIndex.value,
                 onDestinationSelected: onItemTap,
                 destinations: const <NavigationDestination>[
-                  NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Mes champs'),
-                  NavigationDestination(icon: Icon(Icons.inventory_2_outlined), label: 'Mon stock'),
-                  NavigationDestination(icon: Icon(Icons.star_border), label: 'Concours'),
+                  NavigationDestination(icon: Icon(Icons.warehouse), label: 'Mes champs'),
+                  NavigationDestination(icon: Icon(Icons.inventory_2), label: 'Mon stock'),
+                  NavigationDestination(icon: Icon(Icons.emoji_events), label: 'Concours'),
                   NavigationDestination(icon: Icon(Icons.account_circle), label: 'Mon profil'),
                 ],
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../models/kafe.dart';
+import '../../models/enums/kafe.dart';
 
 class GraineCard extends HookConsumerWidget {
   final Kafe kafe;

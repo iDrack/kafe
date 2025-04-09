@@ -5,7 +5,7 @@ import 'package:kafe/providers/champ_stream_provider.dart';
 import 'package:kafe/widgets/modales/modale_plantation.dart';
 import 'package:kafe/widgets/pousses/pousse_card.dart';
 
-import '../../models/kafe.dart';
+import '../../models/enums/kafe.dart';
 import '../../providers/firebase_auth_provider.dart';
 
 class ChampCard extends HookConsumerWidget {
