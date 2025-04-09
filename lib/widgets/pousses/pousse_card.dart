@@ -66,8 +66,10 @@ import '../../providers/firebase_auth_provider.dart';
               etatPousse.value = EtatPousse.Depasse;
             } else if (newRemainingTime <= -tempsDePousseEffectif * 3 &&
                 newRemainingTime > -tempsDePousseEffectif * 5) {
-              etatPousse.value = EtatPousse.Perime;
+              etatPousse.value = EtatPousse.Depasse;
             } else if (newRemainingTime <= -tempsDePousseEffectif * 5) {
+              etatPousse.value = EtatPousse.Abime;
+            } else {
               etatPousse.value = EtatPousse.Perime;
               timer.cancel();
             }

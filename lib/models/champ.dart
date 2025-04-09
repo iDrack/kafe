@@ -31,7 +31,6 @@ class Champ {
       'specificite': specificite.nom,
       'plans': plans.map((plan) => plan.toMap()).toList(),
       'createdAt': createdAt.toIso8601String(),
-      //'plans': plans.map((plan) => Plan()).toList(),
     };
   }
 

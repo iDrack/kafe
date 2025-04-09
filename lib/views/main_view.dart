@@ -1,14 +1,11 @@
-import 'package:kafe/views/pages/home_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kafe/providers/firebase_auth_provider.dart';
+import 'package:kafe/views/pages/home_page.dart';
 import 'package:kafe/views/pages/stock_page.dart';
+import 'package:kafe/widgets/logout_widget.dart';
 
-import '../models/app_user.dart';
-import '../providers/firebase_auth_provider.dart';
-import '../providers/user_stream_provider.dart';
-import '../widgets/logout_widget.dart';
 import 'pages/account_page.dart';
 
 class MainView extends HookConsumerWidget {

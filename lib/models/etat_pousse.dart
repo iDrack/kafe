@@ -19,11 +19,17 @@ enum EtatPousse {
       icon: Icon(Icons.running_with_errors_outlined, color: Colors.orange,),
     penalite: 0.8
   ),
-  Perime(
-      nom: "Périmé",
-      message: "Récolte trop lente, le fruit est fanée ☹️",
+  Abime(
+      nom: "Lente",
+      message: "Récolte trop lente, le fruit est abimé ☹️",
       icon: Icon(Icons.error_outline, color: Colors.red,),
     penalite: 0.5,
+  ),
+  Perime(
+    nom: "Périmé",
+    message: "Mauvaise récolte, le fruit est fanée 😨️",
+    icon: Icon(Icons.delete, color: Colors.black54,),
+    penalite: 0.2,
   );
 
   final String nom;

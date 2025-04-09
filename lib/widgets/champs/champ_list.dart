@@ -21,7 +21,7 @@ class ChampList extends HookConsumerWidget {
               (champ) => Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 8,
-                  horizontal: 46.0,
+                  horizontal: 32.0,
                 ),
                 child: ChampCard(champ: champ),
               ),

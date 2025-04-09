@@ -45,9 +45,9 @@ class AppUser {
         uuid: uuid,
         deevee: snapshot["deevee"] ?? 0,
         goldenSeed: snapshot["goldenSeed"] ?? 0,
-        quantiteKafe: (snapshot["quantiteKafe"] as Map?)?.map<Kafe, num>((key, value) {
-          return MapEntry(Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca), value as num);
-        }) ?? {},
+      quantiteKafe: (snapshot["quantiteKafe"] as Map?)?.map<Kafe, num>((key, value) {
+        return MapEntry(Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca), value as num);
+      }) ?? {},
       quantiteGraine: (snapshot["quantiteGraine"] as Map?)?.map<Kafe, num>((key, value) {
         return MapEntry(Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca), value as num);
       }) ?? {},

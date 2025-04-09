@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kafe/widgets/assemblages/assemblage_list.dart';
 import 'package:kafe/widgets/fruits/fruit_list.dart';
 import 'package:kafe/widgets/graines/graine_list.dart';
 
@@ -25,7 +26,7 @@ class StockPage extends HookConsumerWidget {
           children: [
             FruitList(user: user),
             GraineList(user: user),
-            Center(child: Text("Contenu des Assemblages")),
+            AssemblageList(),
           ],
         ),
       ),

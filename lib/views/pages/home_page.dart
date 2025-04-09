@@ -10,31 +10,8 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-/*    final _searchController = useTextEditingController();
-    final chosenPollType = useState(PollType.pollActive);*/
-    final searchValue = useState("");
-    final isNotEmpty = useState(false);
-
-
-/*
-
-    useEffect(() {
-      _searchController.text = searchValue.value;
-      _searchController.addListener(() {
-        isNotEmpty.value = _searchController.text.isNotEmpty;
-      });
-      return _searchController.dispose;
-    }, [_searchController]);
-*/
-
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text("wip")
-          ],
-        ),
         Expanded(child: ChampFilteredList())
       ],
     );
