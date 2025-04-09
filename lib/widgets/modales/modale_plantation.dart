@@ -23,7 +23,7 @@ class ModalePlantation extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(kafes[index].nom),
-                subtitle: Text("Prix ${kafes[index].prix} 💎\nTemps de pousse : ${kafes[index].tempsDePousse / 60} minutes\nRendement attendu : ${kafes[index].tailleProductionInitial} Kg."),
+                subtitle: Text("Prix ${kafes[index].prix} 💎\nTemps de pousse : ${(kafes[index].tempsDePousse / 60).toStringAsFixed(0)} min\nRendement attendu : ${kafes[index].tailleProductionInitial} Kg."),
                 onTap: () {
                   onKafeSelected(kafes[index]);
                   Navigator.pop(context); // Ferme la modale

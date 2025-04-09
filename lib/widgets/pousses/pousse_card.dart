@@ -85,7 +85,7 @@ import '../../providers/firebase_auth_provider.dart';
         } else {
           num poidRecolter = (kafe!.tailleProductionInitial * (champ.specificite == Specificite.Abondant ? 2 : 1)) * etatPousse.value.penalite;
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${etatPousse.value.message}, Récolter $poidRecolter Kg de Kafé.')),
+            SnackBar(content: Text('${etatPousse.value.message}, récolté $poidRecolter Kg de Kafé.')),
           );
           ref
               .watch(firebaseAuthProvider.notifier)

@@ -10,7 +10,7 @@ final firebaseUser = StateProvider<User?>((ref) => null);
 final userProvider = StateProvider<AppUser?>((ref) => null);
 
 final userStreamProvider = StreamProvider<AppUser?>((ref) {
-  final currentUser = ref.read(firebaseUser.notifier).state;
+  final currentUser = ref.watch(firebaseUser);
   if (currentUser == null) {
     return Stream.value(null);
   }
@@ -40,16 +40,14 @@ class FirebaseAuthProvider extends StateNotifier<FirebaseAuth?> {
   Future<void> initialize() async {
     state = FirebaseAuth.instance;
     if (state != null) {
-      state!.authStateChanges().listen((User? user) {
+      state!.authStateChanges().listen((User? user) async {
         if (user == null) {
           ref.read(firebaseUser.notifier).state = null;
+          ref.read(userProvider.notifier).state = null;
         } else {
           ref.read(firebaseUser.notifier).state = user;
-          ref.read(fireStoreProvider.notifier).retrieveUserInfos(user.uid).then(
-            (user) {
-              ref.watch(userProvider.notifier).state = user;
-            },
-          );
+          final appUser = await ref.read(fireStoreProvider.notifier).retrieveUserInfos(user.uid);
+          ref.read(userProvider.notifier).state = appUser;
         }
       });
     }
@@ -133,8 +131,13 @@ class FirebaseAuthProvider extends StateNotifier<FirebaseAuth?> {
     return result.docs.isNotEmpty;
   }
 
+  Future<int> getDeevee() async {
+    final user = ref.watch(userProvider.notifier).state;
+    return user?.deevee ?? 0;
+  }
+
   Future<void> updateDeevee(int amount) async {
-    final user = ref.read(userProvider);
+    final user = ref.watch(userProvider.notifier).state;
     if (user == null) {
       throw Exception("Aucun utilisateur connecté.");
     }
@@ -152,14 +155,14 @@ class FirebaseAuthProvider extends StateNotifier<FirebaseAuth?> {
   }
 
   Future<void> updateQuantiteKafe(Kafe kafe, num amount) async {
-    final user = ref.read(userProvider);
+    final user = ref.watch(userProvider.notifier).state;
     if (user == null) {
       throw Exception("Aucun utilisateur connecté.");
     }
 
     if (amount < 0) {
       if ((user.quantiteKafe[kafe] ?? 0) + amount < 0) {
-        throw Exception("FQuantité de fruit de ${kafe.nom} insuffisants.");
+        throw Exception("Quantité de fruit de ${kafe.nom} insuffisants.");
       }
     }
 

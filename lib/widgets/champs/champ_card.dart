@@ -6,6 +6,7 @@ import 'package:kafe/widgets/modales/modale_plantation.dart';
 import 'package:kafe/widgets/pousses/pousse_card.dart';
 
 import '../../models/kafe.dart';
+import '../../providers/firebase_auth_provider.dart';
 
 class ChampCard extends HookConsumerWidget {
   final Champ champ;
@@ -44,8 +45,23 @@ class ChampCard extends HookConsumerWidget {
                             child: TextButton(
                               child: const Icon(Icons.add),
                               onPressed: () {
-                                showPlantationModal(context, Kafe.values, (selectedKafe) {
+                                showPlantationModal(context, Kafe.values, (selectedKafe) async {
+                                  final res = await ref
+                                      .watch(firebaseAuthProvider.notifier).getDeevee();
+                                  if (res < selectedKafe.prix) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          "Vous n'avez pas assez de 💎 pour acheter cette graine.",
+                                        ),
+                                      ),
+                                    );
+                                    return;
+                                  }
                                   int index = champ.plans.indexOf(plan);
+                                  ref
+                                      .watch(firebaseAuthProvider.notifier)
+                                      .updateDeevee(-selectedKafe.prix);
                                   createPlan(index, selectedKafe);
                                 });
                               },
