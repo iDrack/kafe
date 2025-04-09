@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kafe/models/assemblage.dart';
 
@@ -71,20 +70,20 @@ class AssemblageStreamNotifier extends StreamNotifier<List<Assemblage>> {
   }
 
   Future<void> setAssemblageInscrit(Assemblage assemblage) async {
-    Stream<QuerySnapshot<Map<String, dynamic>>> snapshots;
-    snapshots = FirebaseFirestore.instance
+    final snapshot =
+        await FirebaseFirestore.instance
             .collection('assemblages')
             .where('userId', isEqualTo: assemblage.userId)
             .where('inscrit', isEqualTo: true)
             .orderBy('createdAt', descending: false)
-            .snapshots();
+            .get();
 
-    if(!(await snapshots.isEmpty)) {
-      snapshots.map((snapshot) {
-        final oldInscrit = snapshot.docs.map((doc) => Assemblage.fromSnapshot(doc, doc.id)).first;
+    if (snapshot.docs.isNotEmpty) {
+      for (final doc in snapshot.docs) {
+        final oldInscrit = Assemblage.fromSnapshot(doc, doc.id);
         oldInscrit.inscrit = false;
         updateAssemblage(oldInscrit);
-      });
+      }
     }
 
     assemblage.inscrit = true;

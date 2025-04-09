@@ -12,8 +12,18 @@ class AssemblageCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void inscrire() {
-      ref.watch(assemblageStreamProvider.notifier).setAssemblageInscrit(assemblage);
+    void inscrire() async {
+      if(assemblage.poid < 1.00) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                "Un assemblage doit faire plus d'1Kg pour concourir. 😮‍💨"
+            ),
+          ),
+        );
+      } else {
+        await ref.watch(assemblageStreamProvider.notifier).setAssemblageInscrit(assemblage);
+      }
     }
 
     void supprimer() async {
@@ -64,6 +74,7 @@ class AssemblageCard extends HookConsumerWidget {
                   }).toList(),
             ),
           ),
+          Text("Poid : ${assemblage.poid.toStringAsFixed(2)} Kg"),
           SizedBox(height: 16.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),

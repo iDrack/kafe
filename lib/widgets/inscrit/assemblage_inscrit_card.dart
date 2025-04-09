@@ -13,10 +13,6 @@ import 'package:flutter/material.dart';
 
               @override
               Widget build(BuildContext context, WidgetRef ref) {
-                void inscrire() {
-                  ref.watch(assemblageStreamProvider.notifier).setAssemblageInscrit(assemblage);
-                }
-
                 void supprimer() async {
                   final bool? confirmed = await showDialog<bool>(
                     context: context,
@@ -64,6 +60,7 @@ import 'package:flutter/material.dart';
                           }).toList(),
                         ),
                       ),
+                      Text("Poid : ${assemblage.poid.toStringAsFixed(2)} Kg"),
                       SizedBox(height: 16.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
