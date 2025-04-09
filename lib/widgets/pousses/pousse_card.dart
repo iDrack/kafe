@@ -10,6 +10,7 @@ import 'package:kafe/models/specificite.dart';
   import '../../models/kafe.dart';
   import '../../models/plan.dart';
   import '../../providers/champ_stream_provider.dart';
+import '../../providers/firebase_auth_provider.dart';
 
   class PousseCard extends HookConsumerWidget {
     final int planIndex;
@@ -27,25 +28,23 @@ import 'package:kafe/models/specificite.dart';
 
     @override
     Widget build(BuildContext context, WidgetRef ref) {
+
       if (kafe == null || datePlantation == null) {
         return const SizedBox();
       }
 
       final etatPousse = useState(EtatPousse.EnCours);
 
-      // Calcul du temps de pousse effectif
       final int tempsDePousseEffectif = champ.specificite == Specificite.Rapide
           ? (kafe!.tempsDePousse / 2).ceil()
           : kafe!.tempsDePousse;
 
-      // Calcul du temps restant basé sur la date de plantation
       final initialRemainingTime = useState<int>(
         tempsDePousseEffectif -
             DateTime.now().difference(datePlantation!).inSeconds,
       );
 
       final remainingTime = useState<int>(initialRemainingTime.value);
-      final isTimerOver = useState<bool>(remainingTime.value <= 0);
 
       useEffect(() {
         Timer? timer;
@@ -88,6 +87,9 @@ import 'package:kafe/models/specificite.dart';
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('${etatPousse.value.message}, Récolter $poidRecolter Kg de Kafé.')),
           );
+          ref
+              .watch(firebaseAuthProvider.notifier)
+              .updateQuantiteKafe(kafe!, poidRecolter);
           champ.plans[planIndex] = Plan();
           ref.read(champStreamProvider.notifier).updateChamp(champ);
 

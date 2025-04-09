@@ -70,7 +70,7 @@ class ChampList extends HookConsumerWidget {
                                   .add(Champ(userId: user.uuid));
                               ref
                                   .watch(firebaseAuthProvider.notifier)
-                                  .updateDeevee(10);
+                                  .updateDeevee(-10);
                               Navigator.of(context).pop();
                             },
                             child: Text("Accepter"),

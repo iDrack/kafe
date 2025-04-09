@@ -43,30 +43,11 @@ class FirestoreNotifier extends StateNotifier<FirebaseFirestore> {
         name: user.name,
         deevee: user.deevee,
         goldenSeed: user.goldenSeed,
+        quantiteKafe: user.quantiteKafe
       );
     } catch (e) {
       print(e);
     }
   }
-/*
-
-  Future<List<Poll>> fetchEndedPolls() async {
-    final snapshot = await state
-        .collection('polls')
-        .where("deadLineDate", isLessThanOrEqualTo: DateTime.now()).orderBy("deadLineDate", descending: true).get();
-    return snapshot.docs
-        .map((doc) => Poll.fromSnapshot(doc, doc.id))
-        .toList();
-  }
-
-  Future<List<Poll>> fetchActivePolls() async {
-    final snapshot = await state
-        .collection('polls')
-        .where("deadLineDate", isGreaterThan: DateTime.now()).orderBy("deadLineDate", descending: false).get();
-    return snapshot.docs
-        .map((doc) => Poll.fromSnapshot(doc, doc.id))
-        .toList();
-  }
-*/
 
 }

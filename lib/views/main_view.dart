@@ -15,7 +15,6 @@ class MainView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final AppUser? user = ref.watch(userProvider);
     final userAsync = ref.watch(userStreamProvider);
 
     final selectedIndex = useState(0);
@@ -60,7 +59,7 @@ class MainView extends HookConsumerWidget {
                   ),
                 ),
               ),
-              leading: LogoutWidget(),
+              actions: [LogoutWidget()],
             ),
             body: widgetOptions.elementAt(selectedIndex.value),
             bottomNavigationBar: NavigationBar(
