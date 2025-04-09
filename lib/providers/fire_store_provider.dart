@@ -43,7 +43,8 @@ class FirestoreNotifier extends StateNotifier<FirebaseFirestore> {
         name: user.name,
         deevee: user.deevee,
         goldenSeed: user.goldenSeed,
-        quantiteKafe: user.quantiteKafe
+        quantiteKafe: user.quantiteKafe,
+        quantiteGraine: user.quantiteGraine,
       );
     } catch (e) {
       print(e);

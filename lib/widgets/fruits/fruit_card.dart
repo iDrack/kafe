@@ -19,7 +19,7 @@ class FruitCard extends HookConsumerWidget {
     return Card(
       child: ListTile(
         title: Text(kafe.nom),
-        subtitle: Text("Quantité : ${poid.toStringAsFixed(3)} Kg"),
+        subtitle: Text("Quantité : ${poid.toStringAsFixed(2)} Kg"),
         trailing: ElevatedButton(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(

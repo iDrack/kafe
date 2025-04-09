@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/widgets/fruits/fruit_list.dart';
+import 'package:kafe/widgets/graines/graine_list.dart';
 
 import '../../models/app_user.dart';
 
@@ -23,7 +24,7 @@ class StockPage extends HookConsumerWidget {
         body: TabBarView(
           children: [
             FruitList(user: user),
-            Center(child: Text("Contenu des Graines")),
+            GraineList(user: user),
             Center(child: Text("Contenu des Assemblages")),
           ],
         ),

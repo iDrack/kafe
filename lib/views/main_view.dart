@@ -28,8 +28,6 @@ class MainView extends HookConsumerWidget {
       return null;
     }, [selectedIndex.value]);
 
-
-
     void onItemTap(int index) {
       selectedIndex.value = index;
     }

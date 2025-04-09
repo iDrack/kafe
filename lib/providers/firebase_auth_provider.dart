@@ -101,6 +101,13 @@ class FirebaseAuthProvider extends StateNotifier<FirebaseAuth?> {
             Kafe.Roupetta: 0.0,
             Kafe.Tourista: 0.0,
           },
+          quantiteGraine: {
+            Kafe.Rubisca: 0.0,
+            Kafe.Goldoriat: 0.0,
+            Kafe.Arbrista: 0.0,
+            Kafe.Roupetta: 0.0,
+            Kafe.Tourista: 0.0,
+          },
         );
         print(user.toDocument());
         ref.read(fireStoreProvider.notifier).createNewUser(user);
@@ -152,6 +159,31 @@ class FirebaseAuthProvider extends StateNotifier<FirebaseAuth?> {
       'deevee': user.deevee,
     });
     ref.read(userProvider.notifier).state = user;
+  }
+
+  Future<void> updateQuantiteGraine(Kafe kafe, num amount) async {
+    final user = ref.watch(userProvider.notifier).state;
+    if (user == null) {
+      throw Exception("Aucun utilisateur connecté.");
+    }
+
+    if (amount < 0) {
+      if ((user.quantiteGraine[kafe] ?? 0) + amount < 0) {
+        throw Exception("Quantité de graines de ${kafe.nom} insuffisantes.");
+      }
+    }
+
+    user.quantiteGraine[kafe] = (user.quantiteGraine[kafe] ?? 0) + amount;
+    await FirebaseFirestore.instance.collection('users').doc(user.uuid).update({
+      'quantiteGraine': user.quantiteGraine.map((key, value) => MapEntry(key.nom, value)),
+    });
+    ref.read(userProvider.notifier).state = user;
+  }
+
+  Future<void> updateSechage(Kafe kafe, num amount) async {
+    updateQuantiteKafe(kafe, -amount);
+    updateQuantiteGraine(kafe, amount * 0.952);
+
   }
 
   Future<void> updateQuantiteKafe(Kafe kafe, num amount) async {

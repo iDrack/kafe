@@ -7,6 +7,7 @@ class AppUser {
   int deevee = 0;
   int goldenSeed = 0;
   final Map<Kafe, num> quantiteKafe;
+  final Map<Kafe, num> quantiteGraine;
 
   AppUser({
     required this.uuid,
@@ -14,8 +15,8 @@ class AppUser {
     required this.email,
     required this.deevee,
     required this.goldenSeed,
-    this.quantiteKafe = const {
-    },
+    this.quantiteKafe = const {},
+    this.quantiteGraine = const {},
   });
 
   Map<String, dynamic> toDocument() {
@@ -27,6 +28,9 @@ class AppUser {
       'goldenSeed': this.goldenSeed,
       'quantiteKafe': this.quantiteKafe.map(
         (key, value) => MapEntry(key.nom, value),
+      ),
+      'quantiteGraine': this.quantiteGraine.map(
+            (key, value) => MapEntry(key.nom, value),
       ),
     };
   }
@@ -44,6 +48,9 @@ class AppUser {
         quantiteKafe: (snapshot["quantiteKafe"] as Map?)?.map<Kafe, num>((key, value) {
           return MapEntry(Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca), value as num);
         }) ?? {},
+      quantiteGraine: (snapshot["quantiteGraine"] as Map?)?.map<Kafe, num>((key, value) {
+        return MapEntry(Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca), value as num);
+      }) ?? {},
     );
   }
 }

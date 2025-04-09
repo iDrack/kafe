@@ -26,7 +26,7 @@ class ModalePlantation extends StatelessWidget {
                 subtitle: Text("Prix ${kafes[index].prix} 💎\nTemps de pousse : ${(kafes[index].tempsDePousse / 60).toStringAsFixed(0)} min\nRendement attendu : ${kafes[index].tailleProductionInitial} Kg."),
                 onTap: () {
                   onKafeSelected(kafes[index]);
-                  Navigator.pop(context); // Ferme la modale
+                  Navigator.pop(context);
                 },
               );
             },
