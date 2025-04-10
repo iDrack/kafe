@@ -68,6 +68,7 @@ class SigninView extends HookConsumerWidget {
     }, []);
 
     return MainScaffold(
+      leadingWidget: SizedBox(),
       title: "",
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

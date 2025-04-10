@@ -53,6 +53,7 @@ class Assemblage {
   Map<String, dynamic> toDocument() {
     return {
       'userId': userId,
+      'id': id,
       'quantiteKafe': this.quantiteKafe.map(
         (key, value) => MapEntry(key.nom, value),
       ),
@@ -88,4 +89,30 @@ class Assemblage {
       inscrit: snapshot['inscrit'],
     );
   }
+
+  factory Assemblage.fromMap(Map<String, dynamic> map) {
+    print(map['userId']);
+    print(map['id']);
+    print(map['quantiteKafe']);
+    print(map['gato']);
+    print(map['poid']);
+    print(map['createdAt']);
+    print(map['inscrit']);
+    return Assemblage.all(
+      userId: map['userId'] as String,
+      id: map['id'] as String,
+      quantiteKafe: (map['quantiteKafe'] as Map<String, dynamic>).map((key, value) => MapEntry(
+        Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca),
+        value as num,
+      )),
+      gato: (map['gato'] as Map<String, dynamic>).map((key, value) => MapEntry(
+        key as String,
+        value as num,
+      )),
+      poid: map['poid'] as num,
+      createdAt: DateTime.parse(map['createdAt'] as String),
+      inscrit: map['inscrit'] as bool,
+    );
+  }
+
 }

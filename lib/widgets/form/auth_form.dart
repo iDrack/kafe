@@ -25,7 +25,6 @@ class AuthForm extends HookConsumerWidget {
 
     void trySubmit() {
       final isValid = _formKey.currentState!.validate();
-      FocusScope.of(context).unfocus();
 
       if (!isLogin.value &&
           (passwordController.text != secondPasswordController.text)) {
@@ -41,14 +40,14 @@ class AuthForm extends HookConsumerWidget {
         _formKey.currentState!.save();
         isLogin.value
             ? submitLoginFn(
-              emailController.text.trim(),
-              passwordController.text.trim(),
-            )
+                emailController.text.trim(),
+                passwordController.text.trim(),
+              )
             : submitRegisterFn(
-              emailController.text.trim(),
-              passwordController.text.trim(),
-              usernameController.text.trim(),
-            );
+                emailController.text.trim(),
+                passwordController.text.trim(),
+                usernameController.text.trim(),
+              );
       } else {
         ScaffoldMessenger.of(
           context,

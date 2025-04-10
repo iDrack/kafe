@@ -5,6 +5,8 @@ import 'package:kafe/models/assemblage.dart';
 import 'package:kafe/providers/assemblage_stream_provider.dart';
 import 'package:kafe/widgets/gato/gato_stat_card.dart';
 
+import '../alerts/delete_assemblage_alert.dart';
+
 class AssemblageCard extends HookConsumerWidget {
   final Assemblage assemblage;
 
@@ -30,20 +32,7 @@ class AssemblageCard extends HookConsumerWidget {
       final bool? confirmed = await showDialog<bool>(
         context: context,
         builder:
-            (context) => AlertDialog(
-              title: Text("Confirmation"),
-              content: Text("Voulez-vous vraiment supprimer cet assemblage ?"),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text("Annuler"),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: Text("Confirmer"),
-                ),
-              ],
-            ),
+            (context) => Delete1ssemblageAlert(),
       );
 
       if (confirmed == true) {

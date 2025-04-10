@@ -5,6 +5,7 @@ import 'package:kafe/providers/firebase_auth_provider.dart';
 import 'package:kafe/views/pages/competition_page.dart';
 import 'package:kafe/views/pages/home_page.dart';
 import 'package:kafe/views/pages/stock_page.dart';
+import 'package:kafe/widgets/competition/competition_creation_button.dart';
 import 'package:kafe/widgets/logout_widget.dart';
 
 import 'pages/account_page.dart';
@@ -19,13 +20,6 @@ class MainView extends HookConsumerWidget {
 
     final selectedIndex = useState(0);
 
-    final showMoney = useState(true);
-
-    useEffect(() {
-      showMoney.value = (selectedIndex.value == 0 || selectedIndex.value == 3);
-      return null;
-    }, [selectedIndex.value]);
-
     void onItemTap(int index) {
       selectedIndex.value = index;
     }
@@ -33,7 +27,11 @@ class MainView extends HookConsumerWidget {
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if(ref.watch(firebaseUser) == null) {
-          Navigator.of(context).popAndPushNamed("/signIn");
+          if (Navigator.of(context).canPop()) {
+            Navigator.of(context).popAndPushNamed('/signIn');
+          } else {
+            Navigator.of(context).pushNamed('/signIn');
+          }
         }
       });
       return null;
@@ -53,8 +51,7 @@ class MainView extends HookConsumerWidget {
               appBar: AppBar(
                 title: const Text("Ch'ti Kafé"),
                 centerTitle: true,
-                bottom: (showMoney.value)
-                    ? PreferredSize(
+                bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(20.0),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -66,9 +63,8 @@ class MainView extends HookConsumerWidget {
                             ],
                           ),
                         ),
-                      )
-                    : null,
-                leading: SizedBox(),
+                      ),
+                leading: CompetitionCreationButton(),
                 actions: [LogoutWidget()],
               ),
               body: widgetOptions.elementAt(selectedIndex.value),

@@ -10,7 +10,8 @@ class MainScaffold extends StatelessWidget {
     super.key, 
     required this.title,
     required this.body,
-    this.leadingWidget, this.floatingActionButton,
+    this.leadingWidget,
+    this.floatingActionButton,
   });
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kafe/widgets/competition/competition_list.dart';
 import 'package:kafe/widgets/graines/graine_list.dart';
 import 'package:kafe/widgets/inscrit/inscrit_container.dart';
 
@@ -17,13 +18,13 @@ class CompetitionPage extends HookConsumerWidget {
         appBar: TabBar(
           tabs: [
             Tab(text: "Inscription"),
-            Tab(text: "Résultats"),
+            Tab(text: "Récompenses"),
           ],
         ),
         body: TabBarView(
           children: [
             InscritContainer(),
-            GraineList(user: user),
+            CompetitionList(),
           ],
         ),
       ),

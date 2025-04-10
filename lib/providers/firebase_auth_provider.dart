@@ -161,6 +161,24 @@ class FirebaseAuthProvider extends StateNotifier<FirebaseAuth?> {
     ref.read(userProvider.notifier).state = user;
   }
 
+  Future<void> updateGoldenSeed(int amount) async {
+    final user = ref.watch(userProvider.notifier).state;
+    if (user == null) {
+      throw Exception("Aucun utilisateur connecté.");
+    }
+
+    if (amount < 0 && user.goldenSeed < amount) {
+      throw Exception("Fonds insuffisants.");
+    }
+
+    user.goldenSeed += amount;
+
+    await FirebaseFirestore.instance.collection('users').doc(user.uuid).update({
+      'goldenSeed': user.goldenSeed,
+    });
+    ref.read(userProvider.notifier).state = user;
+  }
+
   Future<void> updateQuantiteGraine(Kafe kafe, num amount) async {
     final user = ref.watch(userProvider.notifier).state;
     if (user == null) {

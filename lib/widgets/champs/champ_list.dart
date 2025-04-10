@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kafe/models/app_user.dart';
 
 import '../../models/champ.dart';
 import '../../providers/champ_stream_provider.dart';
 import '../../providers/firebase_auth_provider.dart';
+import '../alerts/buy_alert.dart';
 import 'champ_card.dart';
 
 class ChampList extends HookConsumerWidget {
@@ -51,33 +53,7 @@ class ChampList extends HookConsumerWidget {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("Acheter un nouveau champ"),
-                        content: Text(
-                          "Voulez-vous acheter un champ pour 10💎 ?",
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text("Annuler"),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              ref
-                                  .watch(champStreamProvider.notifier)
-                                  .add(Champ(userId: user.uuid));
-                              ref
-                                  .watch(firebaseAuthProvider.notifier)
-                                  .updateDeevee(-10);
-                              Navigator.of(context).pop();
-                            },
-                            child: Text("Accepter"),
-                          ),
-                          SizedBox(height: 32.0),
-                        ],
-                      );
+                      return BuyAlert(user: user);
                     },
                   );
                 },

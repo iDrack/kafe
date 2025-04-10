@@ -1,4 +1,5 @@
 import 'package:kafe/providers/firebase_auth_provider.dart';
+import 'package:kafe/scheduler/initialize_scheduler.dart';
 import 'package:kafe/views/main_view.dart';
 import 'package:kafe/views/signin_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'firebase_options.dart';
+import 'models/competition.dart';
 
 
 
@@ -31,6 +33,7 @@ class MyApp extends HookConsumerWidget {
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref.read(firebaseAuthProvider.notifier).initialize();
+        initializeScheduler(ref);
       });
       return null;
     });
