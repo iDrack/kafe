@@ -4,11 +4,12 @@ import 'package:kafe/models/app_user.dart';
 import 'package:kafe/models/champ.dart';
 import 'package:kafe/providers/champ_stream_provider.dart';
 import 'package:kafe/widgets/champs/champ_list.dart';
+import 'package:kafe/widgets/lotti/loading_coffee_widget.dart';
 
 import '../../providers/firebase_auth_provider.dart';
 
-class ChampFilteredList extends HookConsumerWidget {
-  const ChampFilteredList({super.key});
+class ChampPage extends HookConsumerWidget {
+  const ChampPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +24,7 @@ class ChampFilteredList extends HookConsumerWidget {
       stream: fetchChamps(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: LoadingCoffeeWidget());
         } else if (snapshot.hasError) {
           return Center(child: Text(snapshot.error.toString()));
         } else if (snapshot.hasData) {

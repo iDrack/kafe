@@ -3,6 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/models/competition.dart';
 import 'package:kafe/providers/competition_stream_provider.dart';
 import 'package:kafe/widgets/competition/competition_card.dart';
+import 'package:kafe/widgets/lotti/loading_coffee_widget.dart';
+import 'package:kafe/widgets/lotti/not_found_widget.dart';
 
 import '../../providers/firebase_auth_provider.dart';
 
@@ -20,7 +22,7 @@ class CompetitionList extends HookConsumerWidget {
       stream: fetchCompetitions,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: LoadingCoffeeWidget());
         }
         if (snapshot.hasError) {
           return Center(child: Text(snapshot.error.toString()));
@@ -29,10 +31,7 @@ class CompetitionList extends HookConsumerWidget {
           final competitions = snapshot.data!;
           if (competitions.isEmpty) {
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text("Vous n'avez aucune récompense en attente.")],
-              ),
+              child: NotFoundWidget(title: "Vous n'avez aucune récompense en attente."),
             );
           }
           return ListView(

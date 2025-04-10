@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kafe/widgets/lotti/loading_coffee_widget.dart';
 
 import '../../models/app_user.dart';
 import '../../providers/firebase_auth_provider.dart';
@@ -56,7 +57,7 @@ class AccountPage extends HookConsumerWidget {
     }
 
     return isLoading.value
-              ? const Center(child: CircularProgressIndicator())
+              ? const Center(child: LoadingCoffeeWidget())
               : SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 56),

@@ -2,6 +2,7 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 class RecompenseAlert extends ConsumerWidget {
   const RecompenseAlert({
@@ -43,6 +44,13 @@ class RecompenseAlert extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Lottie.asset(
+                'lib/assets/animations/trophy.json',
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
+                repeat: false,
+              ),
               Text("Vous avez obtenu :", style: TextStyle(fontSize: 16)),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),

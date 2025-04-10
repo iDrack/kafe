@@ -69,13 +69,12 @@ class SigninView extends HookConsumerWidget {
     return MainScaffold(
       leadingWidget: SizedBox(),
       title: "",
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
         children: [
-          Text(
-            "Bienvenue dans le Ch'ti Kafé",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          Image.asset(
+            'lib/assets/logos/chitKafeLogo.png',
+            width: 300,
+            height: 300,
           ),
           SizedBox(height: 24),
           Padding(

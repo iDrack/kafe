@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/providers/firebase_auth_provider.dart';
+import 'package:kafe/views/pages/champ_page.dart';
 import 'package:kafe/views/pages/competition_page.dart';
-import 'package:kafe/views/pages/home_page.dart';
 import 'package:kafe/views/pages/stock_page.dart';
 import 'package:kafe/widgets/competition/competition_creation_button.dart';
 import 'package:kafe/widgets/logout_widget.dart';
+import 'package:kafe/widgets/lotti/loading_coffee_widget.dart';
 
 import 'pages/account_page.dart';
 
@@ -40,7 +41,7 @@ class MainView extends HookConsumerWidget {
       data: (user) {
         if (user != null) {
           List<Widget> widgetOptions = <Widget>[
-            HomePage(),
+            ChampPage(),
             StockPage(user: user),
             CompetitionPage(user: user),
             AccountPage(),
@@ -83,7 +84,7 @@ class MainView extends HookConsumerWidget {
         }
         return Center(child: Text("User not found"));
       },
-      loading: () => Center(child: CircularProgressIndicator()),
+      loading: () => Center(child: LoadingCoffeeWidget()),
       error: (err, stack) => Center(child: Text("Erreur : $err")),
     );
       }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kafe/widgets/alerts/confirmation_text_widget.dart';
 
 class DeleteInscriptionAlert extends StatelessWidget {
   const DeleteInscriptionAlert({
@@ -9,8 +10,8 @@ class DeleteInscriptionAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Confirmation"),
-      content: Text("Voulez-vous vraiment retirer l'inscription cet assemblage ?"),
+      title: Center(child: Text("Êtes-vous sûr ?")),
+      content: ConfirmationTextWidget(title: "Voulez-vous désinscrire cet assemblage du prochain concours ?"),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),

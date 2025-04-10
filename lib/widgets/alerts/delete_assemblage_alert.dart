@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kafe/widgets/alerts/confirmation_text_widget.dart';
 
 class Delete1ssemblageAlert extends StatelessWidget {
   const Delete1ssemblageAlert({
@@ -9,8 +10,8 @@ class Delete1ssemblageAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Confirmation"),
-      content: Text("Voulez-vous vraiment supprimer cet assemblage ?"),
+      title: Center(child: Text("Êtes-vous sûr ?")),
+      content: ConfirmationTextWidget(title: "Voulez-vous supprimer cet assemblage ?"),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(false),
