@@ -8,7 +8,8 @@ class FruitCard extends HookConsumerWidget {
   final num poid;
   final Function onPressed;
 
-  const FruitCard({super.key,
+  const FruitCard({
+    super.key,
     required this.kafe,
     required this.poid,
     required this.onPressed,
@@ -25,7 +26,9 @@ class FruitCard extends HookConsumerWidget {
             backgroundColor: MaterialStateProperty.all(
               Theme.of(context).colorScheme.primary,
             ),
-            foregroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onPrimary),
+            foregroundColor: MaterialStateProperty.all(
+              Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
           onPressed: () => onPressed(),
           child: Text("Sécher"),

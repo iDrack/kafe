@@ -13,7 +13,6 @@ class ChampCard extends HookConsumerWidget {
 
   ChampCard({required this.champ});
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Future<void> createPlan(int position, Kafe kafe) async {
@@ -41,13 +40,19 @@ class ChampCard extends HookConsumerWidget {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                            ),
                             child: TextButton(
                               child: const Icon(Icons.add),
                               onPressed: () {
-                                showPlantationModal(context, Kafe.values, (selectedKafe) async {
-                                  final res = await ref
-                                      .watch(firebaseAuthProvider.notifier).getDeevee();
+                                showPlantationModal(context, Kafe.values, (
+                                  selectedKafe,
+                                ) async {
+                                  final res =
+                                      await ref
+                                          .watch(firebaseAuthProvider.notifier)
+                                          .getDeevee();
                                   if (res < selectedKafe.prix) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
@@ -73,10 +78,14 @@ class ChampCard extends HookConsumerWidget {
                   } else {
                     return Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: PousseCard(planIndex: champ.plans.indexOf(plan), champ: champ, kafe: plan.kafe, datePlantation: plan.datePlantation,),
+                      child: PousseCard(
+                        planIndex: champ.plans.indexOf(plan),
+                        champ: champ,
+                        kafe: plan.kafe,
+                        datePlantation: plan.datePlantation,
+                      ),
                     );
                   }
-
                 }).toList(),
           ),
           SizedBox(height: 8.0),

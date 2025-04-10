@@ -1,4 +1,3 @@
-// Dart
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -88,11 +87,21 @@ class ModaleAssemblage extends HookConsumerWidget {
 
     void randomValues() {
       selectedQuantiteGraine.value = {
-        Kafe.Rubisca: Random().nextDouble() *( quantiteGraine[Kafe.Rubisca]?.toDouble() ?? 0.0),
-        Kafe.Goldoriat:Random().nextDouble() *( quantiteGraine[Kafe.Goldoriat]?.toDouble() ?? 0.0),
-        Kafe.Roupetta: Random().nextDouble() *( quantiteGraine[Kafe.Roupetta]?.toDouble() ?? 0.0),
-        Kafe.Tourista: Random().nextDouble() *( quantiteGraine[Kafe.Tourista]?.toDouble() ?? 0.0),
-        Kafe.Arbrista: Random().nextDouble() *( quantiteGraine[Kafe.Arbrista]?.toDouble() ?? 0.0),
+        Kafe.Rubisca:
+            Random().nextDouble() *
+            (quantiteGraine[Kafe.Rubisca]?.toDouble() ?? 0.0),
+        Kafe.Goldoriat:
+            Random().nextDouble() *
+            (quantiteGraine[Kafe.Goldoriat]?.toDouble() ?? 0.0),
+        Kafe.Roupetta:
+            Random().nextDouble() *
+            (quantiteGraine[Kafe.Roupetta]?.toDouble() ?? 0.0),
+        Kafe.Tourista:
+            Random().nextDouble() *
+            (quantiteGraine[Kafe.Tourista]?.toDouble() ?? 0.0),
+        Kafe.Arbrista:
+            Random().nextDouble() *
+            (quantiteGraine[Kafe.Arbrista]?.toDouble() ?? 0.0),
       };
     }
 
@@ -149,18 +158,21 @@ class ModaleAssemblage extends HookConsumerWidget {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: IconButton(
                         onPressed: () => resetValue(),
-                        icon: Icon(Icons.restart_alt, color: Colors.black38,),
+                        icon: Icon(Icons.restart_alt, color: Colors.black38),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 1.0),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 1.0,
+                      ),
                       child: IconButton(
                         onPressed: () => randomValues(),
-                        icon: Icon(Icons.shuffle, color: Colors.black38,),
+                        icon: Icon(Icons.shuffle, color: Colors.black38),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(4.0,8.0,8.0,8.0),
+                      padding: const EdgeInsets.fromLTRB(4.0, 8.0, 8.0, 8.0),
                       child: ElevatedButton(
                         onPressed: () => Navigator.pop(context),
                         child: Text("Annuler"),
@@ -198,10 +210,7 @@ void showAssemblageModal(BuildContext context) {
     context: context,
     isScrollControlled: true,
     builder: (context) {
-      return FractionallySizedBox(
-        heightFactor: 0.9,
-        child: ModaleAssemblage(),
-      );
+      return FractionallySizedBox(heightFactor: 0.9, child: ModaleAssemblage());
     },
   );
 }

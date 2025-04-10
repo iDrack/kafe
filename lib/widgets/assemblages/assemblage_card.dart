@@ -47,7 +47,6 @@ class AssemblageCard extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            //leading: Icon(Icons.album),
             title: Text('Assemblage'),
             subtitle: Text('Créer le : ${DateFormat("dd/MM/yyyy à HH:mm").format(assemblage.createdAt)}'),          ),
           Padding(

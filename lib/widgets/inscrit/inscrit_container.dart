@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/providers/assemblage_stream_provider.dart';
-import 'package:kafe/widgets/assemblages/assemblage_card.dart';
 import 'package:kafe/widgets/inscrit/assemblage_inscrit_card.dart';
+
 import '../../models/assemblage.dart';
 import '../../providers/firebase_auth_provider.dart';
 

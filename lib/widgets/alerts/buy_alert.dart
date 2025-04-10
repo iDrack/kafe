@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,10 +8,7 @@ import '../../providers/champ_stream_provider.dart';
 import '../../providers/firebase_auth_provider.dart';
 
 class BuyAlert extends ConsumerWidget {
-  const BuyAlert({
-    super.key,
-    required this.user,
-  });
+  const BuyAlert({super.key, required this.user});
 
   final AppUser? user;
 
@@ -20,9 +16,7 @@ class BuyAlert extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
       title: Text("Acheter un nouveau champ"),
-      content: Text(
-        "Voulez-vous acheter un champ pour 10💎 ?",
-      ),
+      content: Text("Voulez-vous acheter un champ pour 10💎 ?"),
       actions: [
         TextButton(
           onPressed: () {
@@ -35,9 +29,7 @@ class BuyAlert extends ConsumerWidget {
             ref
                 .watch(champStreamProvider.notifier)
                 .add(Champ(userId: user!.uuid));
-            ref
-                .watch(firebaseAuthProvider.notifier)
-                .updateDeevee(-10);
+            ref.watch(firebaseAuthProvider.notifier).updateDeevee(-10);
             Navigator.of(context).pop();
           },
           child: Text("Accepter"),

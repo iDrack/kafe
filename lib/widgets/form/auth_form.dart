@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'submit_button.dart';
 
 class AuthForm extends HookConsumerWidget {
@@ -8,10 +9,7 @@ class AuthForm extends HookConsumerWidget {
   final void Function(String email, String password, String username)
   submitRegisterFn;
 
-  AuthForm({
-    required this.submitLoginFn,
-    required this.submitRegisterFn,
-  });
+  AuthForm({required this.submitLoginFn, required this.submitRegisterFn});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,14 +38,14 @@ class AuthForm extends HookConsumerWidget {
         _formKey.currentState!.save();
         isLogin.value
             ? submitLoginFn(
-                emailController.text.trim(),
-                passwordController.text.trim(),
-              )
+              emailController.text.trim(),
+              passwordController.text.trim(),
+            )
             : submitRegisterFn(
-                emailController.text.trim(),
-                passwordController.text.trim(),
-                usernameController.text.trim(),
-              );
+              emailController.text.trim(),
+              passwordController.text.trim(),
+              usernameController.text.trim(),
+            );
       } else {
         ScaffoldMessenger.of(
           context,

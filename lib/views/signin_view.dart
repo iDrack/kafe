@@ -14,7 +14,6 @@ class SigninView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     void signin(String email, String password, String username) {
       ref
           .watch(firebaseAuthProvider.notifier)
@@ -30,7 +29,9 @@ class SigninView extends HookConsumerWidget {
                   .then((res) {
                     if (res) {
                       final AppUser? currentuser = ref.watch(userProvider);
-                      ref.watch(champStreamProvider.notifier).add(Champ(userId: currentuser!.uuid));
+                      ref
+                          .watch(champStreamProvider.notifier)
+                          .add(Champ(userId: currentuser!.uuid));
                       Navigator.of(context).pushNamed('/home');
                     }
                   });
@@ -40,7 +41,6 @@ class SigninView extends HookConsumerWidget {
               ).showSnackBar(SnackBar(content: Text(res)));
             }
           });
-
     }
 
     void login(String email, String password) {
@@ -55,7 +55,6 @@ class SigninView extends HookConsumerWidget {
           );
         }
       });
-
     }
 
     useEffect(() {
@@ -78,13 +77,10 @@ class SigninView extends HookConsumerWidget {
             "Bienvenue dans le Ch'ti Kafé",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
-          SizedBox(height: 24,),
+          SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 56),
-            child: AuthForm(
-                      submitLoginFn: login,
-                      submitRegisterFn: signin,
-                    ),
+            child: AuthForm(submitLoginFn: login, submitRegisterFn: signin),
           ),
         ],
       ),

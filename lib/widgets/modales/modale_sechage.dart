@@ -1,5 +1,4 @@
 // Dart
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,9 +22,13 @@ class ModaleSechage extends HookConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 16.0,),
-            Center(child: Text(
-              "Préparation à torréfaction :", style: TextStyle(fontSize: 24.0),),),
+            SizedBox(height: 16.0),
+            Center(
+              child: Text(
+                "Préparation à torréfaction :",
+                style: TextStyle(fontSize: 24.0),
+              ),
+            ),
             ListTile(title: Text(kafe.nom)),
             ListTile(
               title: Text('Sélectionner la quantité'),

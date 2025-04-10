@@ -30,7 +30,7 @@ class AppUser {
         (key, value) => MapEntry(key.nom, value),
       ),
       'quantiteGraine': this.quantiteGraine.map(
-            (key, value) => MapEntry(key.nom, value),
+        (key, value) => MapEntry(key.nom, value),
       ),
     };
   }
@@ -40,17 +40,33 @@ class AppUser {
       throw Exception("Impossible de récupérer la snapshot");
     }
     return AppUser(
-        name: snapshot["name"] ?? "Nom inconnu",
-        email: snapshot["email"] ?? "Email inconnu",
-        uuid: uuid,
-        deevee: snapshot["deevee"] ?? 0,
-        goldenSeed: snapshot["goldenSeed"] ?? 0,
-      quantiteKafe: (snapshot["quantiteKafe"] as Map?)?.map<Kafe, num>((key, value) {
-        return MapEntry(Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca), value as num);
-      }) ?? {},
-      quantiteGraine: (snapshot["quantiteGraine"] as Map?)?.map<Kafe, num>((key, value) {
-        return MapEntry(Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca), value as num);
-      }) ?? {},
+      name: snapshot["name"] ?? "Nom inconnu",
+      email: snapshot["email"] ?? "Email inconnu",
+      uuid: uuid,
+      deevee: snapshot["deevee"] ?? 0,
+      goldenSeed: snapshot["goldenSeed"] ?? 0,
+      quantiteKafe:
+          (snapshot["quantiteKafe"] as Map?)?.map<Kafe, num>((key, value) {
+            return MapEntry(
+              Kafe.values.firstWhere(
+                (e) => e.nom == key,
+                orElse: () => Kafe.Rubisca,
+              ),
+              value as num,
+            );
+          }) ??
+          {},
+      quantiteGraine:
+          (snapshot["quantiteGraine"] as Map?)?.map<Kafe, num>((key, value) {
+            return MapEntry(
+              Kafe.values.firstWhere(
+                (e) => e.nom == key,
+                orElse: () => Kafe.Rubisca,
+              ),
+              value as num,
+            );
+          }) ??
+          {},
     );
   }
 }

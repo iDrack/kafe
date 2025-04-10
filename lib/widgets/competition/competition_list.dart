@@ -1,4 +1,3 @@
-import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/models/competition.dart';
@@ -7,7 +6,6 @@ import 'package:kafe/widgets/competition/competition_card.dart';
 
 import '../../providers/firebase_auth_provider.dart';
 
-
 class CompetitionList extends HookConsumerWidget {
   const CompetitionList({super.key});
 
@@ -15,11 +13,9 @@ class CompetitionList extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
 
-/*    final fetchCompetitions =
-        ref.watch(competitionStreamProvider.notifier).fetchCompetitions();
-    */
-
-    final fetchCompetitions = ref.watch(competitionStreamProvider.notifier).fetchCompetitionsIfUserWon(user!.uuid);
+    final fetchCompetitions = ref
+        .watch(competitionStreamProvider.notifier)
+        .fetchCompetitionsIfUserWon(user!.uuid);
     return StreamBuilder<List<Competition>>(
       stream: fetchCompetitions,
       builder: (context, snapshot) {
@@ -35,9 +31,7 @@ class CompetitionList extends HookConsumerWidget {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Vous n'avez aucune récompense en attente."),
-                ],
+                children: [Text("Vous n'avez aucune récompense en attente.")],
               ),
             );
           }
@@ -50,7 +44,7 @@ class CompetitionList extends HookConsumerWidget {
                     vertical: 8,
                     horizontal: 32.0,
                   ),
-                  child: CompetitionCard(competition: c,),
+                  child: CompetitionCard(competition: c),
                 ),
               ),
             ],

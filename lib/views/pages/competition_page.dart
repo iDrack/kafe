@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/widgets/competition/competition_list.dart';
-import 'package:kafe/widgets/graines/graine_list.dart';
 import 'package:kafe/widgets/inscrit/inscrit_container.dart';
 
 import '../../models/app_user.dart';

@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
 enum Epreuve {
   Tasse(nom: "Tasse", deevee: 2, graine: 2),
   Kafetiere(nom: "Kafetière", deevee: 3, graine: 1),

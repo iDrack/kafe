@@ -14,7 +14,6 @@ class FirestoreNotifier extends StateNotifier<FirebaseFirestore> {
 
   FirestoreNotifier({required this.ref}) : super(FirebaseFirestore.instance);
 
-  //Gestion utilisateur
   Future<void> createNewUser(AppUser user) async {
     try {
       await state.collection('users').doc(user.uuid).set(user.toDocument());

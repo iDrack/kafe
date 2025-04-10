@@ -8,7 +8,6 @@ import '../providers/assemblage_stream_provider.dart';
 void initializeScheduler(WidgetRef ref) {
   final cron = Cron();
 
-  // Planifier une tâche à chaque 19e minute de chaque heure
   cron.schedule(Schedule.parse('19 * * * *'), () async {
     final fetchCompetitions =
     await ref
@@ -18,7 +17,6 @@ void initializeScheduler(WidgetRef ref) {
 
     final now = DateTime.now();
 
-    // Vérification des compétitions actives
     final hasActiveCompetition = fetchCompetitions.any((competition) {
       final competitionEndTime = competition.dateEpreuve.add(
         const Duration(minutes: 19),

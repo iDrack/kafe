@@ -6,8 +6,8 @@ class MainScaffold extends StatelessWidget {
   final Widget? floatingActionButton;
   final Widget? leadingWidget;
 
-  const MainScaffold( {
-    super.key, 
+  const MainScaffold({
+    super.key,
     required this.title,
     required this.body,
     this.leadingWidget,
@@ -18,10 +18,7 @@ class MainScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: floatingActionButton,
-      appBar: AppBar(
-        leading: leadingWidget,
-        title: Text(title),
-      ),
+      appBar: AppBar(leading: leadingWidget, title: Text(title)),
       body: body,
     );
   }

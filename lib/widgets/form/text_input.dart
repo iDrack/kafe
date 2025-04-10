@@ -7,7 +7,7 @@ class TextInput extends StatelessWidget {
   final bool emptyAllowed;
 
   const TextInput({
-    super.key, 
+    super.key,
     required this.label,
     required this.controller,
     this.obscureText = false,
@@ -19,9 +19,7 @@ class TextInput extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
-      decoration: InputDecoration(
-        labelText: label,
-      ),
+      decoration: InputDecoration(labelText: label),
       validator: (value) {
         if (emptyAllowed) {
           return null;

@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kafe/models/plan.dart';
 import 'package:kafe/models/enums/specificite.dart';
+import 'package:kafe/models/plan.dart';
 
 class Champ {
   final String userId;
@@ -40,11 +40,12 @@ class Champ {
       specificite: Specificite.values.firstWhere(
         (x) => x.nom == snapshot["specificite"],
       ),
-      plans: (snapshot['plans'] as List<dynamic>)
-          .map((plan) => Plan.fromMap(plan as Map<String, dynamic>))
-          .toList(),
+      plans:
+          (snapshot['plans'] as List<dynamic>)
+              .map((plan) => Plan.fromMap(plan as Map<String, dynamic>))
+              .toList(),
       id: id,
-      createdAt: DateTime.parse(snapshot['createdAt'])
+      createdAt: DateTime.parse(snapshot['createdAt']),
     );
   }
 }

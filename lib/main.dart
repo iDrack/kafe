@@ -1,28 +1,18 @@
-import 'package:kafe/providers/firebase_auth_provider.dart';
-import 'package:kafe/scheduler/initialize_scheduler.dart';
-import 'package:kafe/views/main_view.dart';
-import 'package:kafe/views/signin_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kafe/providers/firebase_auth_provider.dart';
+import 'package:kafe/scheduler/initialize_scheduler.dart';
+import 'package:kafe/views/main_view.dart';
+import 'package:kafe/views/signin_view.dart';
 
 import 'firebase_options.dart';
-import 'models/competition.dart';
-
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends HookConsumerWidget {
@@ -43,12 +33,14 @@ class MyApp extends HookConsumerWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: (ref.read(firebaseUser) != null) ? const MainView() : const SigninView(),
+      home:
+          (ref.read(firebaseUser) != null)
+              ? const MainView()
+              : const SigninView(),
       routes: {
         '/home': (context) => const MainView(),
-        '/signIn' : (context) => const SigninView(),
+        '/signIn': (context) => const SigninView(),
       },
     );
   }
 }
-

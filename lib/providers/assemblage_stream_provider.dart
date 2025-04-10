@@ -126,14 +126,44 @@ Future<void> updateAssemblage(Assemblage assemblage) async {
         final oldInscrit = Assemblage.fromSnapshot(doc, doc.id);
 
         oldInscrit.inscrit = false;
-        updateAssemblage(oldInscrit);
+        await updateAssemblage(oldInscrit);
       }
     }
+
     assemblage.inscrit = true;
-    updateAssemblage(assemblage);
+    await updateAssemblage(assemblage);
+
+    final competitionSnapshot =
+        await FirebaseFirestore.instance.collection('competitions').get();
+
+    for (var doc in competitionSnapshot.docs) {
+      final competition = Competition.fromSnapshot(doc, doc.id);
+
+      if (!competition.assemblageParticipants.any((a) => a.id == assemblage.id)) {
+        competition.assemblageParticipants.add(assemblage);
+        await FirebaseFirestore.instance
+            .collection('competitions')
+            .doc(competition.id)
+            .update(competition.toDocument());
+      }
+    }
   }
 
   Future<void> deleteAssemblage(Assemblage assemblage) async {
+    final competitionSnapshot =
+        await FirebaseFirestore.instance.collection('competitions').get();
+
+    for (var doc in competitionSnapshot.docs) {
+      final competition = Competition.fromSnapshot(doc, doc.id);
+
+      competition.assemblageParticipants.removeWhere((a) => a.id == assemblage.id);
+
+      await FirebaseFirestore.instance
+          .collection('competitions')
+          .doc(competition.id)
+          .update(competition.toDocument());
+    }
+
     await FirebaseFirestore.instance
         .collection('assemblages')
         .doc(assemblage.id)

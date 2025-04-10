@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kafe/models/app_user.dart';
 import 'package:kafe/models/champ.dart';
@@ -16,7 +15,7 @@ class ChampFilteredList extends HookConsumerWidget {
     final AppUser? user = ref.watch(userProvider);
 
     fetchChamps() {
-      if(user == null) return null;
+      if (user == null) return null;
       return ref.watch(champStreamProvider.notifier).fetchChamps(user.uuid);
     }
 

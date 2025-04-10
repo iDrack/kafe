@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kafe/models/assemblage.dart';
 import 'package:kafe/providers/firebase_auth_provider.dart';
 
 import '../models/competition.dart';

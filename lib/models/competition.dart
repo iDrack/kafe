@@ -85,12 +85,9 @@ class Competition {
       gagnantId: snapshot['gagnantId'] ?? "",
       secondGagnantId: snapshot['secondGagnantId'] ?? "",
       assemblageParticipants:
-          (snapshot['assemblageParticipants'] as List<dynamic>)
-              .map((a) {
-                print(a['id']);
-                return Assemblage.fromMap(a);
-              })
-              .toList(),
+          (snapshot['assemblageParticipants'] as List<dynamic>).map((a) {
+            return Assemblage.fromMap(a);
+          }).toList(),
       premiereEpreuve: Epreuve.values.firstWhere(
         (e) => e.nom == snapshot['premiereEpreuve'],
       ),
@@ -101,21 +98,25 @@ class Competition {
     );
   }
 
-factory Competition.fromDocument(DocumentSnapshot<Map<String, dynamic>> snapshot, String id) {
-  return Competition.all(
-    id: id,
-    gagnantId: snapshot['gagnantId'],
-    secondGagnantId: snapshot['secondGagnantId'],
-    assemblageParticipants: (snapshot['assemblageParticipants'] as List<dynamic>)
-        .map((a) => Assemblage.fromMap(a as Map<String, dynamic>))
-        .toList(),
-    premiereEpreuve: Epreuve.values.firstWhere(
-      (e) => e.nom == snapshot['premiereEpreuve'],
-    ),
-    secondeEpreuve: Epreuve.values.firstWhere(
-      (e) => e.nom == snapshot['secondeEpreuve'],
-    ),
-    dateEpreuve: DateTime.parse(snapshot['dateEpreuve']),
-  );
-}
+  factory Competition.fromDocument(
+    DocumentSnapshot<Map<String, dynamic>> snapshot,
+    String id,
+  ) {
+    return Competition.all(
+      id: id,
+      gagnantId: snapshot['gagnantId'],
+      secondGagnantId: snapshot['secondGagnantId'],
+      assemblageParticipants:
+          (snapshot['assemblageParticipants'] as List<dynamic>)
+              .map((a) => Assemblage.fromMap(a as Map<String, dynamic>))
+              .toList(),
+      premiereEpreuve: Epreuve.values.firstWhere(
+        (e) => e.nom == snapshot['premiereEpreuve'],
+      ),
+      secondeEpreuve: Epreuve.values.firstWhere(
+        (e) => e.nom == snapshot['secondeEpreuve'],
+      ),
+      dateEpreuve: DateTime.parse(snapshot['dateEpreuve']),
+    );
+  }
 }

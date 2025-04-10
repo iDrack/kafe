@@ -15,28 +15,19 @@ class Assemblage {
     : createdAt = DateTime.now() {
     poid = 0.0;
     inscrit = false;
-    gato = {
-      "Gout": 0.0,
-      "Amertume": 0.0,
-      "Teneur": 0.0,
-      "Odorat": 0.0,
-    };
+    gato = {"Gout": 0.0, "Amertume": 0.0, "Teneur": 0.0, "Odorat": 0.0};
 
     quantiteKafe.values.forEach((x) => poid += x);
 
     quantiteKafe.entries.forEach((item) {
-
       gato["Gout"] =
           (gato["Gout"] ?? 0) + (item.key.gout * ((item.value / poid)));
       gato["Amertume"] =
-          (gato["Amertume"] ?? 0) +
-          (item.key.amertume * ((item.value / poid)));
+          (gato["Amertume"] ?? 0) + (item.key.amertume * ((item.value / poid)));
       gato["Teneur"] =
-          (gato["Teneur"] ?? 0) +
-          (item.key.teneur * ((item.value / poid)));
+          (gato["Teneur"] ?? 0) + (item.key.teneur * ((item.value / poid)));
       gato["Odorat"] =
-          (gato["Odorat"] ?? 0) +
-          (item.key.odorat * ((item.value / poid)));
+          (gato["Odorat"] ?? 0) + (item.key.odorat * ((item.value / poid)));
     });
   }
 
@@ -91,28 +82,24 @@ class Assemblage {
   }
 
   factory Assemblage.fromMap(Map<String, dynamic> map) {
-    print(map['userId']);
-    print(map['id']);
-    print(map['quantiteKafe']);
-    print(map['gato']);
-    print(map['poid']);
-    print(map['createdAt']);
-    print(map['inscrit']);
     return Assemblage.all(
       userId: map['userId'] as String,
       id: map['id'] as String,
-      quantiteKafe: (map['quantiteKafe'] as Map<String, dynamic>).map((key, value) => MapEntry(
-        Kafe.values.firstWhere((e) => e.nom == key, orElse: () => Kafe.Rubisca),
-        value as num,
-      )),
-      gato: (map['gato'] as Map<String, dynamic>).map((key, value) => MapEntry(
-        key as String,
-        value as num,
-      )),
+      quantiteKafe: (map['quantiteKafe'] as Map<String, dynamic>).map(
+        (key, value) => MapEntry(
+          Kafe.values.firstWhere(
+            (e) => e.nom == key,
+            orElse: () => Kafe.Rubisca,
+          ),
+          value as num,
+        ),
+      ),
+      gato: (map['gato'] as Map<String, dynamic>).map(
+        (key, value) => MapEntry(key as String, value as num),
+      ),
       poid: map['poid'] as num,
       createdAt: DateTime.parse(map['createdAt'] as String),
       inscrit: map['inscrit'] as bool,
     );
   }
-
 }

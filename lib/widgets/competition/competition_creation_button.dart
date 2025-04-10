@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -67,9 +66,9 @@ class CompetitionCreationButton extends ConsumerWidget {
               .read(competitionStreamProvider.notifier)
               .add(newCompetition);
 
-          await ref.watch(competitionStreamProvider.notifier).FindWinners(newCompetition);
-
-
+          await ref
+              .watch(competitionStreamProvider.notifier)
+              .FindWinners(newCompetition);
 
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Nouvelle compétition créée !")),
