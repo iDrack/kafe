@@ -9,10 +9,11 @@ class Assemblage {
   late final Map<String, num> gato;
   late num poid;
   final DateTime createdAt;
-  late var inscrit;
+  late bool inscrit;
 
   Assemblage({required this.userId, required this.quantiteKafe})
     : createdAt = DateTime.now() {
+    id = "";
     poid = 0.0;
     inscrit = false;
     gato = {"Gout": 0.0, "Amertume": 0.0, "Teneur": 0.0, "Odorat": 0.0};

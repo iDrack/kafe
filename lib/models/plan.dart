@@ -15,7 +15,7 @@ class Plan {
     };
   }
 
-  factory Plan.fromMap(Map<String, dynamic> map) {
+    factory Plan.fromMap(Map<String, dynamic> map) {
     return Plan.all(
       kafe:
           map['kafe'] != null
