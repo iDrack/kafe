@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kafe/models/assemblage.dart';
 
+import '../models/app_user.dart';
 import '../models/competition.dart';
+import '../models/enums/kafe.dart';
 
 final assemblageStreamProvider =
     StreamNotifierProvider<AssemblageStreamNotifier, List<Assemblage>>(
@@ -23,11 +25,24 @@ class AssemblageStreamNotifier extends StreamNotifier<List<Assemblage>> {
         );
   }
 
-  Future<void> add(Assemblage assemblage) async {
-    FirebaseFirestore.instance
-        .collection('assemblages')
-        .add(assemblage.toDocument());
-  }
+Future<void> add(Assemblage assemblage, AppUser user) async {
+  final updatedQuantiteKafe = Map<Kafe, num>.from(user.quantiteKafe);
+  assemblage.quantiteKafe.entries.forEach((ingredient) {
+    if (updatedQuantiteKafe.containsKey(ingredient.key)) {
+      updatedQuantiteKafe[ingredient.key] =
+          (updatedQuantiteKafe[ingredient.key]! - ingredient.value).clamp(0, double.infinity);
+    }
+  });
+
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(user.uuid)
+      .update({'quantiteKafe': updatedQuantiteKafe.map((key, value) => MapEntry(key.nom, value))});
+
+  await FirebaseFirestore.instance
+      .collection('assemblages')
+      .add(assemblage.toDocument());
+}
 
 Future<void> updateAssemblage(Assemblage assemblage) async {
   await FirebaseFirestore.instance
@@ -36,20 +51,17 @@ Future<void> updateAssemblage(Assemblage assemblage) async {
       .update(assemblage.toDocument());
 
   if (!assemblage.inscrit) {
-    // Récupérer toutes les compétitions
     QuerySnapshot competitionSnapshot =
         await FirebaseFirestore.instance.collection('competitions').get();
 
     for (var doc in competitionSnapshot.docs) {
       Competition competition = Competition.fromSnapshot(doc, doc.id);
 
-      // Vérifier si l'assemblage est dans assemblageParticipants
       int initialCount = competition.assemblageParticipants.length;
       competition.assemblageParticipants.removeWhere(
         (a) => a.id == assemblage.id,
       );
 
-      // Si l'assemblage a été retiré, mettre à jour la compétition
       if (competition.assemblageParticipants.length < initialCount) {
         await FirebaseFirestore.instance
             .collection('competitions')

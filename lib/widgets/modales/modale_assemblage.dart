@@ -69,6 +69,7 @@ class ModaleAssemblage extends HookConsumerWidget {
                   userId: user.uuid,
                   quantiteKafe: selectedQuantiteGraine.value,
                 ),
+              user
               );
         }
         Navigator.pop(context);
