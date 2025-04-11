@@ -19,7 +19,7 @@ ___
 
 - Un apk est disponible dans l'archive d'évaluation.
 - Télécharger l'APK depuis la dernière version disponible dans l'onglet "Release"
-- [Devenez testeur pour l'application](https://appdistribution.firebase.dev/i/a8fb9f2dcfbce549)
+- [Devenez testeur pour l'application](https://appdistribution.firebase.dev/i/2375ee831f4160b1)
 
 ### Compiler l'APK vous-même :
 
