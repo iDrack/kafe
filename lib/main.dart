@@ -31,7 +31,7 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp(
       title: 'Kafé',
       theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData.light(),
       themeMode: ThemeMode.system,
       home:
           (ref.read(firebaseUser) != null)

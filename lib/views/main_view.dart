@@ -84,7 +84,7 @@ class MainView extends HookConsumerWidget {
         }
         return Center(child: Text("User not found"));
       },
-      loading: () => Center(child: LoadingCoffeeWidget()),
+      loading: () => Scaffold(body: Center(child: LoadingCoffeeWidget())),
       error: (err, stack) => Center(child: Text("Erreur : $err")),
     );
       }
