@@ -65,7 +65,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/logos/chitKafeLogo.png"
+  image_path: "lib/assets/logos/chitKafeLogo.png"
 # The following section is specific to Flutter packages.
 flutter:
   assets:
