@@ -38,7 +38,6 @@ void initializeScheduler(WidgetRef ref) {
         return;
       }
 
-      // Vérification pour éviter les doublons
       final existingCompetition = fetchCompetitions.any((competition) {
         return competition.dateEpreuve.hour == now.hour &&
             competition.dateEpreuve.minute == now.minute;

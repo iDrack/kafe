@@ -89,6 +89,13 @@ class CompetitionStreamNotifier extends StreamNotifier<List<Competition>> {
           (updatedCompetition.secondGagnantId == null || updatedCompetition.secondGagnantId!.isEmpty)) {
         updatedCompetition.findWinner();
         await updateCompetition(updatedCompetition);
+
+        for (final assemblage in updatedCompetition.assemblageParticipants) {
+          await FirebaseFirestore.instance
+              .collection('assemblages')
+              .doc(assemblage.id)
+              .delete();
+        }
       }
     }
   }

@@ -51,13 +51,6 @@ import 'package:flutter/material.dart';
 
                 inscritsStream.listen((inscrits) async {
                   if (inscrits.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          "Aucun assemblage inscrit pour créer une compétition !",
-                        ),
-                      ),
-                    );
                     return;
                   }
 

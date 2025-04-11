@@ -189,3 +189,37 @@ CREATE TABLE Utilisateur_Graine (
 
 ```
 </details>
+
+___
+
+## Spécificité de l'application
+
+### Information général
+
+Un utilisateur commence avec 15 deevee (💎) et 0 graines d'or (🪙) et un champ.
+
+Un champ peut acceuillir jusqu'à 4 plans de kafé, chaque pousse de kafé a un temps de pousse et un rendement différent.
+
+Au fil du temps les fruits encore dans des plans ne sont pas récolté, ils perdent en rendement.
+
+Lorsque l'utilisateur décide de séchez ses fruits pour en faire des grains, il perd 4,58% de matière produite.
+
+Un concours ne peut se lancer uniquement s'il y a au moins un assemblage d'inscrit.
+
+### La création de concours
+
+Les concours sont créé de manière automatique toutes les heures à la 19éme minute.
+
+Afin d'arriver à ceci un cron est lancé dans l'application qui va regarder à chauqe 19éme minute d'une heure si un concours éxiste, si au moins un assemblage est "inscrit" puis créer une compétition avec tous les assemblages d'inscrit.
+
+Et enfin une autre requête va venir appeler la méthode findWinner() du concours pour déterminé les gagnants.
+
+Enfin dans la vue résultat on affiche uniquement les concours dont l'utilisateur est un gagnant.
+
+### Informations supplémentaires
+
+Afin de simplifier les tests de l'application, il est possible de générer un concours quand on le souhaite en cliquant sur le logo de l'application en haut de l'écran.
+
+___
+
+Réalisé par [Dignoire Thomas](https://www.thomasdignoire.fr/)
